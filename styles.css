@@ -62,11 +62,13 @@ body{
     z-index: 1000;
     width: 180px;
     padding: 10px 0;
+    
 }
 .menu-right.show{
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    
 
 }
 .menu-right ul{
@@ -141,7 +143,7 @@ footer{
     border-radius: 10px;
 }
 .section a{
-color: blue;
+color: rgb(255, 255, 255);
 text-decoration: none;
 font-weight: bold;
 }
@@ -170,4 +172,186 @@ a, button, .btn-artiste {
 h2,h3{
     font-family: "georgia", serif;
     color: #990000;
+}
+form{
+max-width: 600px;
+margin left: 40px;
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+form label{
+    font-weight: bold;
+    color: #333;   
+}
+
+form input,
+form textarea{ 
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    
+}
+form button:hover{
+    background-color: darkred;
+}
+.social-link{
+    color: #144bb9;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.social-link{
+    color: #2d4373;
+}
+
+.banner{
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+.premium-call{
+    background-color: #ffe6e6;
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 2px solid darkred;
+    border-bottom: 2px solid darkred;
+}
+.btn{
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.event-item img{
+    width: 400px;
+    height: auto;
+    border-radius: 8px;
+}
+.premium-banner{
+    background-color: #300;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    background-size: cover;
+    background-blend-mode: multiply;
+}
+.premium-list{
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 700px;
+}
+.premium-list li{
+    margin-bottom: 12px;
+    padding-left: 20px;
+    position: relative;
+}
+.premium-list li::before{
+    position: absolute;
+    left: O;
+}
+
+.locked-content{
+    background-color: #f4f4f4;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.locked-player{
+    padding: 10px;
+    background-color: #ddd;
+    color: #888;
+    text-align: center;
+    border-radius: 6px;
+    font-style: italic;
+}
+.btn.toggle-btn{
+    margin: 20px 0;
+    background-color: darkred;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn.large{
+    font-size: 18px;
+    padding: 12px 30px;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+    color: #ffd700;
+}
+h1.titre-premium{
+    color: #f4f4f4;
+}
+.hidden {
+    display: none;
+    opacity: 0;   
+}
+.premium-list.show {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+form{
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+select{
+    width: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.btn.large{
+    font-size: 18px;
+    padding: 12px 30px;
+    background-color: darkred;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.note{
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+    color: #666;
+}
+
+.center{
+    text-align: center;
+    padding: 40px 20px;
+}
+.center h2{
+    color: green;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+input{
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }

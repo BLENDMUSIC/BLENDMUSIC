@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title> Paiement premium - Blend Music</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="script.js" defer></script>
+        <script type="module" src="auth.js"></script>
+        <script type="module" src="firebase.js"></script>
+    </head>
+    
+    <script type="module">
+        import {handleConnexion } from './auth.js';
+        document.getElementById("loginForm").addEventListener("submit", handleConnexion);
+    </script>
+    <body>
+        
+        <header class="header">
+            <div class="logo-left">
+                <img src="Images/Logo.JPG" alt="Logo Blend Music" class="logo"̣/>᷆
+            </div>
+            <div class="header-center">
+                <h1>Bienvenue dans Blend Music</h1>
+                <p class="slogan">When culture speaks</p>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">Menu</div>
+            <nav class="menu-right" id="menu">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="apropos.html">À propos de nous</a></li>
+                    <li><a href="artistes.html">Nos artistes</a></li>
+                    <li><a href="premium.html">Premium</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>             
+            </nav>
+        </header>
+        <section class="section center">
+            <h2>Connexion membre</h2>
+            <p>Veuillez entrer vos identifiants pour accéder aux contenus Premium.</p>
+            <form id="loginForm" onsubmit="return loginUser()">
+                <input type="email" id="email" placeholder="Adresse e-mail" required><br><br>
+                <input type="password" id="password" placeholder="Mot de passe" required><br><br>
+                <button type="submit" class="btn">Se connecter</button>
+            </form>
+            <p class="note">Connexion fictive : mot de passe = <strong>blend2025</strong></p>
+        </section>
+        <footer>
+            <p>Yaoundé, Cameroun | blendmusic01@gmail.com</p>
+            <p> &copy; 2025 Blend Music | Tous droits réservés </p>
+        </footer>
+    </body>
+</html>
