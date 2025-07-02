@@ -1,96 +1,129 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title> Devenir premium - Espace Premium</title>
-        <link rel="stylesheet" href="styles.css">
-        <script src="script.js" defer></script>
-    </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Devenir Premium – Blend Music</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
 
-    <script type="module">
-        import { auth } from './firebase.js';
-        import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-      
-        document.getElementById("logoutBtn").addEventListener("click", () => {
+  <header class="header">
+    <div class="logo-left">
+      <img src="Images/Logo.JPG" alt="Logo Blend Music" class="logo" />
+    </div>
+    <div class="header-center">
+      <h1>Bienvenue dans Blend Music</h1>
+      <p class="slogan">When culture speaks</p>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav class="menu-right" id="menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li><a href="artistes.html">Nos artistes</a></li>
+        <li><a href="premium.html">Premium</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section premium-banner">
+      <h1 class="titre-premium">Rejoignez l'espace Premium de Blend Music</h1>
+      <p>La culture se vit en profondeur – découvrez-la en intégralité</p>
+      <a href="#avantages" class="btn">Voir les avantages</a>
+    </section>
+
+    <section class="section" id="avantages">
+      <h2>Ce que vous débloquez en devenant Premium</h2>
+      <button class="btn toggle-btn" id="toggle-btn">Voir les avantages</button>
+
+      <ul class="premium-list hidden" id="premium-list">
+        <li>Accès complet à toutes les musiques</li>
+        <li>Accès aux vidéos exclusives : studios, interviews, coulisses</li>
+        <li>Morceaux inédits et téléchargements réservés</li>
+        <li>Accès anticipé aux nouvelles sorties</li>
+        <li>Droit de vote et suggestions sur les prochaines productions</li>
+        <li>Newsletter mensuelle avec contenus culturels et bonus</li>
+        <li>Invitation à des lives privés en ligne</li>
+        <li>Votre nom parmi les soutiens Blend Music (si vous le souhaitez)</li>
+      </ul>
+
+      <div class="center">
+        <a href="paiement.html" class="btn large">Je m'abonne maintenant</a>
+      </div>
+    </section>
+
+    <section class="section premium-content">
+      <h3>Musiques réservées aux membres Premium</h3>
+
+      <div class="locked-content">
+        <p><strong>Amina</strong> – Assiko</p>
+        <div class="locked-player">Audio complet réservé aux membres</div>
+      </div>
+      <div class="locked-content">
+        <p><strong>Déception</strong> – Mangambeu</p>
+        <div class="locked-player">Audio complet réservé aux membres</div>
+      </div>
+      <div class="locked-content">
+        <p><strong>Et s’il fallait</strong> – Bikutsi</p>
+        <div class="locked-player">Audio complet réservé aux membres</div>
+      </div>
+
+      <p class="premium-note">Connectez-vous ou abonnez-vous pour débloquer l'accès</p>
+    </section>
+
+    <div class="center">
+      <button id="logoutBtn" class="btn">Se déconnecter</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>📍 Yaoundé, Cameroun | 📧 blendmusic01@gmail.com</p>
+    <p>&copy; 2025 Blend Music | Tous droits réservés</p>
+  </footer>
+
+  <!-- 🔐 Scripts de protection + logout + toggle -->
+  <script type="module">
+    import { auth } from './firebase.js';
+    import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    // Protéger l'accès à la page premium
+    onAuthStateChanged(auth, (user) => {
+      if (!user || !user.emailVerified) {
+        alert("Vous devez être connecté et avoir vérifié votre adresse e-mail.");
+        window.location.href = "connexion.html";
+      }
+    });
+
+    // Gestion du bouton de déconnexion
+    document.addEventListener("DOMContentLoaded", () => {
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
           signOut(auth).then(() => {
             alert("Déconnexion réussie");
             window.location.href = "connexion.html";
           });
         });
-      </script>
-      
-    <body>
-        
-        <header class="header">
-            <div class="logo-left">
-                <img src="Images/Logo.JPG" alt="Logo Blend Music" class="logo"̣/>᷆
-            </div>
-            <div class="header-center">
-                <h1>Bienvenue dans Blend Music</h1>
-                <p class="slogan">When culture speaks</p>
-            </div>
-            <div class="menu-toggle" onclick="toggleMenu()">Menu</div>
-            <nav class="menu-right" id="menu">
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="apropos.html">À propos de nous</a></li>
-                    <li><a href="artistes.html">Nos artistes</a></li>
-                    <li><a href="premium.html">Premium</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>             
-            </nav>
-        </header>
-        <main>
-            <section class="section premium-banner">
-                <h1 class="titre-premium">Rejoignez l'espace Premium de Blend Music</h1>
-                <p> La culture se vit en profondeur - découvrez-là en intégralité</p>
-                <a href="#avantages" class="btn">Voir les avantages</a>
-            </Section>
+      }
 
-            <section class="section" id="avantages">
-                <h2>Ce que vous débloquez en devenant Premium</h2>
+      // Affichage des avantages
+      const toggleBtn = document.getElementById("toggle-btn");
+      const premiumList = document.getElementById("premium-list");
 
-                <button class="btn toggle-btn" id="toggle-btn" onclick="toggleAdvantages()">Voir les avantages</button>
+      if (toggleBtn && premiumList) {
+        toggleBtn.addEventListener("click", () => {
+          premiumList.classList.toggle("show");
+          toggleBtn.textContent = premiumList.classList.contains("show")
+            ? "Masquer les avantages"
+            : "Voir les avantages";
+        });
+      }
+    });
+  </script>
 
-                <ul class="premium-list hidden" id="premium-list">
-                    <li> Accès complet à toutes les musiques</li>
-                    <li> Accès aux vidéo exclusives : studios, interviews, coulisses</li>
-                    <li>Morceaux inédits et téléchargements réservés</li>
-                    <li>Accès anticipé aux nouvelles sorties</li>
-                    <li>Droit de vote et/ou de suggestions sur les prochaines productions</li>
-                    <li>Newsletter mensuelle avec contenus culturels et bonus</li>
-                    <li>Invitation à des lives privés en ligne</li>
-                    <li>Votre nom parmi les soutiens Blend Music (si vous le souhaitez)</li>
-                </ul>
-                <div class="center">
-                    <a href="paiement.html" class="btn large"> Je  m'abonne maintenant</a>
-                </div>
-            </section>
-
-            <section class="section premium-content">
-                <h3>Musiques réservés aux membres Premium</h3>
-
-                <div class="locked-content">
-                    <p><strong>Amina</strong> - Assiko</p>
-                    <div class="locked-player"> Audio complet réservé aux membres</div>
-                </div>
-                <div class="locked-content">
-                    <p><strong>Déception</strong> - Mangambeu</p>
-                    <div class="locked-player"> Audio complet réservé aux membres</div>
-                </div>
-                <div class="locked-content">
-                    <p><strong>Et s'il fallait</strong> - Bikutsi</p>
-                    <div class="locked-player"> Audio complet réservé aux membres</div>
-                </div>
-                <p class="premium-note">Connectez-vous ou abonnez-vous pour débloquer l'accès</p>
-            </section>
-            <button id="logoutBtn" class="btn">Se déconnecter</button>
-                
-        </main>
-        <footer>
-            <p>Yaoundé, Cameroun | blendmusic01@gmail.com</p>
-            <p> &copy; 2025 Blend Music | Tous droits réservés </p>
-        </footer>
-    </body>
+</body>
 </html>

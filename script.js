@@ -1,49 +1,54 @@
+// Alerte pour les contenus Premium
 function alertePremium() {
-    alert("Ce contenu est réservé aux membres Premium. Veuillez vous abonner y accéder.")
-}
-
-function toggleMenu() {
+    alert("Ce contenu est réservé aux membres Premium. Veuillez vous abonner pour y accéder.");
+  }
+  
+  // Toggle menu mobile
+  function toggleMenu() {
     const menu = document.getElementById("menu");
     menu.classList.toggle("show");
-}
-function toggleAvantages() {
+  }
+  
+  // Toggle liste des avantages Premium
+  function toggleAvantages() {
     const list = document.getElementById("premium-list");
+    const button = document.getElementById("toggle-btn");
+  
     list.classList.toggle("show");
-}
-function toggleAvantages() {
-    const list = document.getElementById("premium-list");
-    const list = document.getElementById("toggle-btn");
-    list.classList.remove("hidden");
-    list.classList.toggle("show");
+  
     if (list.classList.contains("show")) {
-        button.textContent = "Masquer les avantages";
+      button.textContent = "Masquer les avantages";
     } else {
-        button.textContent = "Voir les avantages";
+      button.textContent = "Voir les avantages";
     }
-}
-
-function processPayment() {
+  }
+  
+  // Traitement fictif du paiement
+  function processPayment() {
     const plan = document.getElementById("plan").value;
     const operator = document.getElementById("operator").value;
-
+  
     if (!plan || !operator) {
-        alert ("veuillez sélectionner un abonnement et un mode de paiement.");
-        return false;
+      alert("Veuillez sélectionner un type d'abonnement et un mode de paiement.");
+      return false;
     }
-    alert(
-        Abonnement choisi : ${plan.toUpperCase()}\nMéthode de paiement : ${plan.toUpperCase()}\n\Redirection vers paiement...̀
-    );
+  
+    alert("Merci pour votre abonnement. Redirection vers l’espace Premium...");
     window.location.href = "merci.html";
     return false;
-}
-function loginUser() {
+  }
+  
+  // Connexion fictive sans Firebase (à améliorer)
+  function loginUser() {
     const email = document.getElementById("email").value;
-    const password = document.getElementById("Password").value;
-    
+    const password = document.getElementById("password").value;
+  
     if (password === "blend2025") {
-        alert("Connexion reussi !");
+      alert("Connexion réussie !");
     } else {
-        alert("Mot de passe incorrect.Réessayez.");
+      alert("Mot de passe incorrect. Réessayez.");
     }
+  
     return false;
-}
+  }
+  
