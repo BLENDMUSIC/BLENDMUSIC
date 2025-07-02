@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inscription - Blend Music</title>
+  <script src="script.js" defer></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="firebase.js"></script>
+</head>
+<body>
+  <h2>Inscription</h2>
+  <form id="signupForm">
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="password" id="password" placeholder="Mot de passe" required><br>
+    <button type="submit">S'inscrire</button>
+  </form>
+
+  <script type="module">
+    import { handleInscription } from './auth.js';
+    document.getElementById("signupForm").addEventListener("submit", handleInscription);
+  </script>
