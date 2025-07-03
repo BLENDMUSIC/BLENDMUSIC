@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mon compte – Blend Music</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo-left">
+      <img src="Images/Logo.JPG" alt="Logo Blend Music" class="logo" />
+    </div>
+    <div class="header-center">
+      <h1>Bienvenue dans Blend Music</h1>
+      <p class="slogan">When culture speaks</p>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav class="menu-right" id="menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="premium.html">Premium</a></li>
+        <li><a href="moncompte.html">Mon compte</a></li>
+        <li><a href="#" id="logoutBtn">Se déconnecter</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <h2>Mon compte</h2>
+      <div id="compte-info">
+        <p><strong>Email :</strong> <span id="user-email"></span></p>
+        <p><strong>Type d'abonnement :</strong> <span id="user-plan"></span></p>
+        <p><strong>Date de début :</strong> <span id="start-date"></span></p>
+        <p><strong>Date de fin :</strong> <span id="end-date"></span></p>
+        <p><strong>Statut :</strong> <span id="status"></span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>📍 Yaoundé, Cameroun | 📧 blendmusic01@gmail.com</p>
+    <p>&copy; 2025 Blend Music | Tous droits réservés</p>
+  </footer>
+
+  <!-- ✅ Script Firebase -->
+  <script type="module">
+    import { auth, db } from './firebase.js';
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const userEmail = document.getElementById("user-email");
+    const userPlan = document.getElementById("user-plan");
+    const startDate = document.getElementById("start-date");
+    const endDate = document.getElementById("end-date");
+    const status = document.getElementById("status");
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        alert("Vous devez être connecté pour accéder à votre compte.");
+        window.location.href = "connexion.html";
+        return;
+      }
+
+      userEmail.textContent = user.email;
+
+      const ref = doc(db, "abonnements", user.uid);
+      const snap = await getDoc(ref);
+
+      if (!snap.exists()) {
+        userPlan.textContent = "Aucun";
+        startDate.textContent = "-";
+        endDate.textContent = "-";
+        status.textContent = "Non abonné";
+        return;
+      }
+
+      const data = snap.data();
+      const plan = data.plan;
+      const dateDebut = new Date(data.dateDebut);
+      let duree = 0;
+
+      if (plan === "mensuel") duree = 30;
+      else if (plan === "semestriel") duree = 180;
+      else if (plan === "annuel") duree = 365;
+
+      const dateFin = new Date(dateDebut);
+      dateFin.setDate(dateDebut.getDate() + duree);
+
+      const now = new Date();
+      const actif = now <= dateFin;
+
+      userPlan.textContent = plan;
+      startDate.textContent = dateDebut.toLocaleDateString();
+      endDate.textContent = dateFin.toLocaleDateString();
+      status.textContent = actif ? "Actif ✅" : "Expiré ❌";
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        alert("Déconnecté avec succès.");
+        window.location.href = "connexion.html";
+      });
+    });
+  </script>
+</body>
+</html>
