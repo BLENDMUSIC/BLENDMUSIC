@@ -477,7 +477,16 @@ button.btn:hover {
     display: block;
     margin: 20px auto;
   }
+  .premium-list.hidden {
+    display: none;
+  }
   
+  .premium-list.show {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+    
 
 
 

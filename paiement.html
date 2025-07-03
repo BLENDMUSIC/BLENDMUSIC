@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="styles.css" />
   <script src="script.js" defer></script>
 </head>
+
 <body>
 
   <header class="header">
@@ -34,7 +35,8 @@
       <h2>Abonnement Premium</h2>
       <p>Profitez d’un accès complet à toute la plateforme Blend Music et soutenez la culture patrimoniale.</p>
 
-      <form id="paiementForm" onsubmit="return processPayment()">
+      <!-- ✅ Supprimé onsubmit inutile -->
+      <form id="paiementForm">
         <label for="plan"><strong>Type d'abonnement :</strong></label><br>
         <select id="plan" name="plan" required>
           <option value="">-- Choisissez votre forfait --</option>
@@ -66,5 +68,25 @@
     <p>&copy; 2025 Blend Music | Tous droits réservés</p>
   </footer>
 
+  <!-- ✅ Script d’enregistrement d’abonnement -->
+  <script type="module">
+    import { enregistrerAbonnement } from './abonnement.js';
+
+    document.getElementById("paiementForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const plan = document.getElementById("plan").value;
+      const operateur = document.getElementById("operator").value;
+
+      if (!plan || !operateur) {
+        alert("Veuillez choisir un abonnement et un mode de paiement.");
+        return;
+      }
+
+      enregistrerAbonnement(plan); // Envoie le plan à Firestore
+    });
+  </script>
+
 </body>
 </html>
+

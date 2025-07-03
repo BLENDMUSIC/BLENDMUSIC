@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Devenir Premium – Blend Music</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -29,7 +29,8 @@
     </nav>
   </header>
 
-  <main>
+  <!-- ✅ Contenu Premium masqué jusqu’à validation -->
+  <main id="premium-content" style="display: none;">
     <section class="section premium-banner">
       <h1 class="titre-premium">Rejoignez l'espace Premium de Blend Music</h1>
       <p>La culture se vit en profondeur – découvrez-la en intégralité</p>
@@ -39,18 +40,16 @@
     <section class="section" id="avantages">
       <h2>Ce que vous débloquez en devenant Premium</h2>
       <button class="btn toggle-btn" id="toggle-btn">Voir les avantages</button>
-
       <ul class="premium-list hidden" id="premium-list">
         <li>Accès complet à toutes les musiques</li>
-        <li>Accès aux vidéos exclusives : studios, interviews, coulisses</li>
-        <li>Morceaux inédits et téléchargements réservés</li>
+        <li>Vidéos exclusives : studios, interviews, coulisses</li>
+        <li>Morceaux inédits, téléchargements réservés</li>
         <li>Accès anticipé aux nouvelles sorties</li>
-        <li>Droit de vote et suggestions sur les prochaines productions</li>
-        <li>Newsletter mensuelle avec contenus culturels et bonus</li>
-        <li>Invitation à des lives privés en ligne</li>
-        <li>Votre nom parmi les soutiens Blend Music (si vous le souhaitez)</li>
+        <li>Droit de vote ou suggestions sur les prochaines productions</li>
+        <li>Newsletter mensuelle culturelle & bonus</li>
+        <li>Invitations à des lives privés</li>
+        <li>Votre nom parmi les soutiens Blend Music (optionnel)</li>
       </ul>
-
       <div class="center">
         <a href="paiement.html" class="btn large">Je m'abonne maintenant</a>
       </div>
@@ -58,7 +57,6 @@
 
     <section class="section premium-content">
       <h3>Musiques réservées aux membres Premium</h3>
-
       <div class="locked-content">
         <p><strong>Amina</strong> – Assiko</p>
         <div class="locked-player">Audio complet réservé aux membres</div>
@@ -71,7 +69,6 @@
         <p><strong>Et s’il fallait</strong> – Bikutsi</p>
         <div class="locked-player">Audio complet réservé aux membres</div>
       </div>
-
       <p class="premium-note">Connectez-vous ou abonnez-vous pour débloquer l'accès</p>
     </section>
 
@@ -85,20 +82,24 @@
     <p>&copy; 2025 Blend Music | Tous droits réservés</p>
   </footer>
 
-  <!-- 🔐 Scripts de protection + logout + toggle -->
+  <!-- ✅ Protection Firebase : accès premium -->
   <script type="module">
     import { auth } from './firebase.js';
-    import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    // Protéger l'accès à la page premium
     onAuthStateChanged(auth, (user) => {
       if (!user || !user.emailVerified) {
-        alert("Vous devez être connecté et avoir vérifié votre adresse e-mail.");
+        alert("Vous devez être connecté(e) et avoir vérifié votre adresse e-mail.");
         window.location.href = "connexion.html";
+      } else {
+        document.getElementById("premium-content").style.display = "block";
       }
     });
 
-    // Gestion du bouton de déconnexion
+    // Déconnexion
     document.addEventListener("DOMContentLoaded", () => {
       const logoutBtn = document.getElementById("logoutBtn");
       if (logoutBtn) {
@@ -109,15 +110,16 @@
           });
         });
       }
+    });
 
-      // Affichage des avantages
-      const toggleBtn = document.getElementById("toggle-btn");
-      const premiumList = document.getElementById("premium-list");
-
-      if (toggleBtn && premiumList) {
-        toggleBtn.addEventListener("click", () => {
-          premiumList.classList.toggle("show");
-          toggleBtn.textContent = premiumList.classList.contains("show")
+    // Avantages toggle
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("toggle-btn");
+      const list = document.getElementById("premium-list");
+      if (btn && list) {
+        btn.addEventListener("click", () => {
+          list.classList.toggle("show");
+          btn.textContent = list.classList.contains("show")
             ? "Masquer les avantages"
             : "Voir les avantages";
         });
@@ -127,3 +129,4 @@
 
 </body>
 </html>
+
