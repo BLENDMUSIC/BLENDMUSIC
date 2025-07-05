@@ -2,28 +2,24 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Connexion – Blend Music</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-  <script type="module" src="firebase.js"></script>
-  <script type="module" src="auth.js"></script>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
+
   <header class="header">
     <div class="logo-left">
-      <img src="Images/Logo.JPG" alt="Logo Blend Music" class="logo"/>
+      <img src="Images/Logo.JPG" alt="Logo Blend Music" class="logo" />
     </div>
     <div class="header-center">
       <h1>Bienvenue dans Blend Music</h1>
       <p class="slogan">When culture speaks</p>
     </div>
-    <div class="menu-toggle" onclick="toggleMenu()">Menu</div>
-    <nav class="menu-right" id="menu">
+    <nav class="menu-right">
       <ul>
         <li><a href="index.html">Accueil</a></li>
-        <li><a href="apropos.html">À propos de nous</a></li>
+        <li><a href="apropos.html">À propos</a></li>
         <li><a href="artistes.html">Nos artistes</a></li>
         <li><a href="premium.html">Premium</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -31,30 +27,26 @@
     </nav>
   </header>
 
-  <section class="section center">
-    <h2>Connexion membre</h2>
-    <p>Veuillez entrer vos identifiants pour accéder aux contenus Premium.</p>
+  <main>
+    <section class="section center">
+      <h2>Se connecter</h2>
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="Adresse e-mail" required /><br /><br />
+        <input type="password" id="password" placeholder="Mot de passe" required /><br /><br />
+        <button type="submit" class="btn">Se connecter</button>
+      </form>
 
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="Adresse e-mail" required><br><br>
-      <input type="password" id="password" placeholder="Mot de passe" required><br><br>
-      <button type="submit" class="btn">Se connecter</button>
-    </form>
-
-    <p class="note">
-      Pas encore de compte ? <a href="inscription.html">Créer un compte</a><br>
-    </p>
-  </section>
+      <p>Pas encore de compte ? <a href="inscription.html">S'inscrire</a></p>
+    </section>
+  </main>
 
   <footer>
     <p>📍 Yaoundé, Cameroun | 📧 blendmusic01@gmail.com</p>
     <p>&copy; 2025 Blend Music | Tous droits réservés</p>
   </footer>
 
-  <!-- Lien vers la fonction handleConnexion -->
-  <script type="module">
-    import { handleConnexion } from './auth.js';
-    document.getElementById("loginForm").addEventListener("submit", handleConnexion);
-  </script>
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="auth.js"></script>
+
 </body>
 </html>

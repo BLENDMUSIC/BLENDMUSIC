@@ -1,54 +1,50 @@
+// auth.js
 import { auth } from './firebase.js';
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendEmailVerification,
-  onAuthStateChanged
+  signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// Fonction d'inscription
-export function handleInscription(event) {
-  event.preventDefault();
+// Gestion de l'inscription avec confirmation du mot de passe
+const signupForm = document.getElementById('signupForm');
+if (signupForm) {
+  signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+    const email = signupForm.email.value;
+    const password = signupForm.password.value;
+    const confirmPassword = signupForm.confirmPassword.value;
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      sendEmailVerification(userCredential.user)
-        .then(() => {
-          alert("Vérifiez votre e-mail pour confirmer votre inscription !");
-          window.location.href = "connexion.html";
-        });
-    })
-    .catch((error) => {
-      alert("Erreur : " + error.message);
-    });
+    if (password !== confirmPassword) {
+      alert("Les mots de passe ne correspondent pas !");
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Inscription réussie ! Vous pouvez maintenant vous connecter.");
+      window.location.href = 'connexion.html';
+    } catch (error) {
+      alert("Erreur lors de l'inscription : " + error.message);
+    }
+  });
 }
 
-// Fonction de connexion
-export function handleConnexion(event) {
-  event.preventDefault();
+// Gestion de la connexion
+const loginForm = document.getElementById('loginForm');
+if (loginForm) {
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+    const email = loginForm.email.value;
+    const password = loginForm.password.value;
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      if (userCredential.user.emailVerified) {
-        alert("Connexion réussie !");
-        window.location.href = "premium.html";
-      } else {
-        alert("Veuillez d'abord vérifier votre adresse e-mail.");
-      }
-    })
-    .catch((error) => {
-      alert("Erreur : " + error.message);
-    });
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Connexion réussie !");
+      window.location.href = 'index.html'; // ou autre page d'accueil
+    } catch (error) {
+      alert("Erreur lors de la connexion : " + error.message);
+    }
+  });
 }
-
-// ✅ Lien entre le formulaire et la fonction
-if (document.getElementById("signupForm")) {
-  document.getElementById("signupForm").addEventListener("submit", handleInscription);
-}
-
