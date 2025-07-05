@@ -7,6 +7,125 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="script.js" defer></script>
+  <style>
+    /* Styles spécifiques au carrousel */
+    .carousel {
+      position: relative;
+      max-width: 800px;
+      margin: 2rem auto 3rem auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      background: #000;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .slide img {
+      width: 100%;
+      display: block;
+      border-radius: 15px 15px 0 0;
+      max-height: 400px;
+      object-fit: cover;
+    }
+
+    .caption {
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0 0 15px 15px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .caption h3 {
+      margin: 0 0 0.3rem 0;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      padding: 1rem;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 2rem;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.4);
+      user-select: none;
+      transition: background 0.3s;
+      border: none;
+      z-index: 10;
+    }
+
+    .prev:hover, .next:hover {
+      background: rgba(0,0,0,0.8);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .dots {
+      text-align: center;
+      padding: 1rem 0 1.5rem 0;
+      background: #f0f0f0;
+      border-radius: 0 0 15px 15px;
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 6px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .dot.active {
+      background-color: #ff4b2b;
+    }
+
+    /* Ajustement responsive */
+    @media (max-width: 600px) {
+      .caption {
+        font-size: 0.9rem;
+        padding: 0.8rem 1rem;
+      }
+      .prev, .next {
+        font-size: 1.5rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -31,6 +150,44 @@
   </header>
 
   <main>
+
+    <!-- Carrousel inséré ici -->
+    <section class="carousel" aria-label="Présentation des nouveautés Blend Music">
+      <div class="slides">
+        <div class="slide active">
+          <img src="Images/artiste1.jpg" alt="Artiste Manuella en concert" />
+          <div class="caption">
+            <h3>Nouvel album de Manuella</h3>
+            <p>Découvrez son dernier tube qui fait sensation.</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="Images/concert.jpg" alt="Affiche concert exclusif à Yaoundé" />
+          <div class="caption">
+            <h3>Concert exclusif à Yaoundé</h3>
+            <p>Réservez vite votre place pour l’événement de l’année !</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="Images/nouveau-single.jpg" alt="Nouvel extrait musical Blend Music" />
+          <div class="caption">
+            <h3>Nouveau single disponible</h3>
+            <p>Écoutez en avant-première le nouveau son de Blend Music.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="prev" aria-label="Image précédente">&#10094;</button>
+      <button class="next" aria-label="Image suivante">&#10095;</button>
+
+      <div class="dots" role="tablist" aria-label="Navigation du carrousel">
+        <span class="dot active" role="tab" aria-selected="true" tabindex="0"></span>
+        <span class="dot" role="tab" tabindex="-1"></span>
+        <span class="dot" role="tab" tabindex="-1"></span>
+      </div>
+    </section>
+
+    <!-- Contenu existant conservé -->
 
     <section class="section banner">
       <h2>Bienvenue dans l’univers de la musique patrimoniale</h2>
@@ -109,6 +266,49 @@
     <p>📍 Yaoundé, Cameroun | 📧 blendmusic01@gmail.com</p>
     <p>&copy; 2025 Blend Music | Tous droits réservés</p>
   </footer>
+
+  <script>
+    // Script carrousel
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const dots = document.querySelectorAll('.dot');
+
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+        dots[i].classList.toggle('active', i === index);
+        dots[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
+        dots[i].tabIndex = i === index ? 0 : -1;
+      });
+
+      currentIndex = index;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        showSlide(i);
+      });
+    });
+
+    // Auto slide toutes les 5 secondes
+    setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 5000);
+  </script>
 
 </body>
 </html>

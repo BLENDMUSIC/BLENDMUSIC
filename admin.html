@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Administration – Blend Music</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo-left">
+      <img src="Images/Logo.JPG" alt="Logo Blend Music" class="logo" />
+    </div>
+    <div class="header-center">
+      <h1>Administration Blend Music</h1>
+      <p class="slogan">When culture speaks</p>
+    </div>
+    <nav class="menu-right">
+      <ul>
+        <li><a href="dashboard.html">Tableau de bord</a></li>
+        <li><a href="index.html">Accueil</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section center">
+      <h2>Gestion des utilisateurs</h2>
+      <table border="1" id="usersTable" style="width:100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Rôle</th>
+            <th>Changer rôle</th>
+          </tr>
+        </thead>
+        <tbody id="usersBody">
+            <section class="section center" style="margin-bottom: 2em;">
+                <h2>Envoyer une notification aux abonnés Premium</h2>
+                <form id="emailForm">
+                  <label for="subject">Sujet :</label><br>
+                  <input type="text" id="subject" required style="width: 100%;"><br><br>
+                  <label for="message">Message :</label><br>
+                  <textarea id="message" rows="5" required style="width: 100%;"></textarea><br><br>
+                  <button type="submit" class="btn">Envoyer</button>
+                </form>
+              </section>
+              
+          <!-- Les utilisateurs s'afficheront ici -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>📍 Yaoundé, Cameroun | 📧 blendmusic01@gmail.com</p>
+    <p>&copy; 2025 Blend Music | Tous droits réservés</p>
+  </footer>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="admin.js"></script>
+
+</body>
+</html>

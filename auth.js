@@ -1,11 +1,12 @@
 // auth.js
-import { auth } from './firebase.js';
+import { auth, db } from './firebase.js';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Gestion de l'inscription avec confirmation du mot de passe
+// Gestion de l'inscription avec création profil utilisateur dans Firestore
 const signupForm = document.getElementById('signupForm');
 if (signupForm) {
   signupForm.addEventListener('submit', async (e) => {
@@ -21,7 +22,16 @@ if (signupForm) {
     }
 
     try {
+      // Créer l'utilisateur Firebase Auth
       await createUserWithEmailAndPassword(auth, email, password);
+
+      // Créer le profil utilisateur dans Firestore avec rôle par défaut
+      await setDoc(doc(db, "users", auth.currentUser.uid), {
+        email: email,
+        role: "simple", // rôle par défaut
+        createdAt: new Date()
+      });
+
       alert("Inscription réussie ! Vous pouvez maintenant vous connecter.");
       window.location.href = 'connexion.html';
     } catch (error) {
@@ -42,7 +52,7 @@ if (loginForm) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("Connexion réussie !");
-      window.location.href = 'index.html'; // ou autre page d'accueil
+      window.location.href = 'dashboard.html'; // redirection vers dashboard
     } catch (error) {
       alert("Erreur lors de la connexion : " + error.message);
     }
