@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   sendEmailVerification,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"; // ✅ bon lien
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 // Fonction d'inscription
 export function handleInscription(event) {
@@ -46,3 +46,9 @@ export function handleConnexion(event) {
       alert("Erreur : " + error.message);
     });
 }
+
+// ✅ Lien entre le formulaire et la fonction
+if (document.getElementById("signupForm")) {
+  document.getElementById("signupForm").addEventListener("submit", handleInscription);
+}
+
