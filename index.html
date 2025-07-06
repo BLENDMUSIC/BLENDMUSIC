@@ -6,7 +6,11 @@
   <title>Accueil – Blend Music</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="carousel.css" />
+  <script src="carousel.js" defer></script>
   <script src="script.js" defer></script>
+  <script src="player.js" defer></script>
+
   <style>
     /* Styles spécifiques au carrousel */
     .carousel {
@@ -150,14 +154,22 @@
   </header>
 
   <main>
-
+    <div class="welcome-popup" id="welcomePopup">
+      <div class="popup-content">
+        <span class="close-btn" id="closePopup">&times;</span>
+        <h3>🎉 Bienvenue chez Blend Music !</h3>
+        <p>Accédez à la culture musicale premium camerounaise.</p>
+        <a href="premium.html" class="btn">Je découvre l’abonnement</a>
+      </div>
+    </div>
+    
     <!-- Carrousel inséré ici -->
     <section class="carousel" aria-label="Présentation des nouveautés Blend Music">
       <div class="slides">
         <div class="slide active">
           <img src="Images/artiste1.jpg" alt="Artiste Manuella en concert" />
           <div class="caption">
-            <h3>Nouvel album de Manuella</h3>
+            <h3>Nouvel album de Nach</h3>
             <p>Découvrez son dernier tube qui fait sensation.</p>
           </div>
         </div>
@@ -186,6 +198,8 @@
         <span class="dot" role="tab" tabindex="-1"></span>
       </div>
     </section>
+    
+    <div id="carousel-container"></div>
 
     <!-- Contenu existant conservé -->
 
@@ -253,6 +267,25 @@
       </div>
       <p class="premium-note">⚠️ Écoute complète réservée aux membres Premium</p>
     </section>
+    <section id="artist-of-the-month" class="fade-in-section">
+      <h2>Artiste du mois</h2>
+      <div class="artist-highlight">
+        <img src="Images/Nach.jpg" alt="Manuella - Artiste du mois" />
+        <div class="artist-info">
+          <h3>Manuella</h3>
+          <p>Découvrez Nach, une étoile montante de la scène camerounaise qui mêle rythmes traditionnels et sons modernes.</p>
+          <a href="artistes.html#manuella" class="btn">En savoir plus</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="musique-du-mois">
+      <h2>🎼 Musique du Mois</h2>
+      <div id="musique-container">Chargement...</div>
+    </section>
+    
+    
+    
 
     <section class="section premium-call">
       <h2>Débloquez l’univers complet de Blend Music</h2>
@@ -261,7 +294,15 @@
     </section>
 
   </main>
-
+  <section class="newsletter-section">
+    <h3>Abonnez-vous à notre newsletter</h3>
+    <form id="newsletterForm">
+      <input type="email" id="newsletterEmail" placeholder="Votre adresse e-mail" required />
+      <button type="submit" class="btn">S’abonner</button>
+    </form>
+    <p id="newsletterMessage"></p>
+  </section>
+  
   <footer>
     <p>📍 Yaoundé, Cameroun | 📧 blendmusic01@gmail.com</p>
     <p>&copy; 2025 Blend Music | Tous droits réservés</p>
@@ -308,7 +349,51 @@
     setInterval(() => {
       showSlide(currentIndex + 1);
     }, 5000);
+
+    
   </script>
+  <script src="carousel.js" defer></script>
+  <script type="module">
+    import { db } from './firebase.js';
+    import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  
+    async function chargerMusiqueDuMois() {
+      const container = document.getElementById('musique-container');
+      container.innerHTML = 'Chargement...';
+  
+      const colRef = collection(db, "musique_du_mois");
+      const snapshot = await getDocs(colRef);
+  
+      let musique = null;
+  
+      snapshot.forEach(doc => {
+        musique = doc.data(); // prend la première (ou la plus récente si tu veux trier)
+      });
+  
+      if (!musique) {
+        container.innerHTML = "<p>Aucune musique en vedette ce mois-ci.</p>";
+        return;
+      }
+  
+      container.innerHTML = `
+        <div class="musique-mois-card">
+          <img src="${musique.imageURL}" alt="Pochette ${musique.titre}" class="musique-img" />
+          <div class="musique-details">
+            <h3>${musique.titre}</h3>
+            <p class="musique-desc">${musique.description}</p>
+            <audio controls>
+              <source src="${musique.audioURL}" type="audio/mpeg" />
+              Votre navigateur ne supporte pas la lecture audio.
+            </audio>
+          </div>
+        </div>
+      `;
+    }
+  
+    chargerMusiqueDuMois();
+  </script>
+  
+
 
 </body>
 </html>
