@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog – Blend Music</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Styles spécifiques au blog */
+    .article-annonce {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1rem;
+    }
+    .article-thumb {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    .article-text {
+      flex: 1;
+    }
+    .article-text h3 {
+      margin: 0 0 0.5rem 0;
+    }
+    .article-text p {
+      margin: 0 0 0.75rem 0;
+    }
+    .btn.small {
+      padding: 0.3rem 0.7rem;
+      font-size: 0.9rem;
+      background-color: #c00;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+    .btn.small:hover {
+      background-color: #a00;
+    }
+    @media (max-width: 600px) {
+      .article-annonce {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .article-thumb {
+        width: 100%;
+        height: auto;
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo-left">
+      <img src="Images/Logo.JPG" alt="Logo Blend Music" class="logo" />
+    </div>
+    <div class="header-center">
+      <h1>Bienvenue dans Blend Music</h1>
+      <p class="slogan">When culture speaks</p>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav class="menu-right" id="menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li><a href="artistes.html">Nos artistes</a></li>
+        <li><a href="premium.html">Premium</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="section container">
+    <h2>Nos articles</h2>
+
+    <!-- Article 1 -->
+    <div class="article-annonce">
+      <img src="Images/image-nach-showcase-small.jpg" alt="Blend Music Show" class="article-thumb" />
+      <div class="article-text">
+        <h3>Le Blend Music Show</h3>
+        <p>Le Blend Music Show est un événement exclusif organisé pour faire découvrir Nach, un jeune talent que nous accompagnons. Il met en valeur les rythmes patrimoniaux camerounais avec une touche moderne.</p>
+        <a href="article-blend-music-show.html" class="btn small">Lire davantage</a>
+      </div>
+    </div>
+
+    <!-- Article 2 -->
+    <div class="article-annonce">
+      <img src="Images/image-assiko-small.jpg" alt="Assiko" class="article-thumb" />
+      <div class="article-text">
+        <h3>L’Assiko, un rythme de fierté</h3>
+        <p>L’Assiko est un rythme emblématique du Cameroun, symbole de résistance culturelle. Découvrez son histoire et sa place dans la musique contemporaine.</p>
+        <a href="article-assiko.html" class="btn small">Lire davantage</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>📍 Yaoundé, Cameroun | 📧 blendmusic01@gmail.com</p>
+    <p>&copy; 2025 Blend Music | Tous droits réservés</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Le Blend Music Show – Blend Music</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .article-detail {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .article-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .article-image {
+      width: 300px;
+      max-width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo-left">
+      <img src="Images/Logo.JPG" alt="Logo Blend Music" class="logo" />
+    </div>
+    <div class="header-center">
+      <h1>Bienvenue dans Blend Music</h1>
+      <p class="slogan">When culture speaks</p>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav class="menu-right" id="menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li><a href="artistes.html">Nos artistes</a></li>
+        <li><a href="premium.html">Premium</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="article-detail">
+    <div class="article-header">
+      <img src="Images/image nach au show case.JPG" alt="Nach au Blend Music Show" class="article-image" />
+      <h1>Le Blend Music Show</h1>
+    </div>
+
+    <p>
+      Le Blend Music Show est un événement exclusif organisé pour faire découvrir Nach, un jeune talent que nous accompagnons. Lors de cette première édition, plusieurs morceaux en cours de production ont été présentés en avant-première. Ce show case a pour objectif de promouvoir les rythmes patrimoniaux camerounais en leur donnant une touche moderne et innovante.
+    </p>
+    <p>
+      Nach, originaire de la région du Centre, est un passionné de musique qui a débuté dans la chorale d’église catholique. Il a appris à jouer de la guitare et s’est lancé dans la composition musicale. Le Blend Music Show s’est déroulé dans la prestigieuse salle du Centre culturel camerounais Ubutu situé au quartier Fouda. Ce fut un moment d’écoute et de danse aux rythmes d’Assiko, Mangambeu et Bikutsi.
+    </p>
+    <p>
+      Pour couronner l’événement, Dynastie le Tigre, une des voix les plus prestigieuses du Cameroun, a enchanté l’assistance avec ses improvisations mélodiques. Ce Blend Music Show est une invitation à découvrir la richesse musicale camerounaise dans sa modernité et sa tradition.
+    </p>
+  </main>
+
+  <footer>
+    <p>📍 Yaoundé, Cameroun | 📧 blendmusic01@gmail.com</p>
+    <p>&copy; 2025 Blend Music | Tous droits réservés</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

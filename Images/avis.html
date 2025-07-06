@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Avis & Témoignages – Blend Music</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="avis.js" defer></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo-left">
+    <img src="Images/Logo.JPG" alt="Logo Blend Music" class="logo"/>
+  </div>
+  <div class="header-center">
+    <h1>Avis & Témoignages</h1>
+    <p class="slogan">Votre voix compte pour nous</p>
+  </div>
+</header>
+
+<main class="section">
+
+  <section class="feedback-form">
+    <h2>Donnez votre avis</h2>
+    <form id="reviewForm">
+      <label for="name">Nom :</label><br>
+      <input type="text" id="name" required><br><br>
+
+      <label for="rating">Votre note :</label><br>
+      <div id="rating-stars">
+        ★★★★★
+      </div><br>
+
+      <label for="message">Témoignage :</label><br>
+      <textarea id="message" rows="4" required></textarea><br><br>
+
+      <button type="submit" class="btn">Envoyer</button>
+    </form>
+  </section>
+
+  <section class="feedback-list">
+    <h2>Ce que disent nos utilisateurs</h2>
+    <div id="reviews-container"></div>
+  </section>
+
+</main>
+
+<footer>
+  <p>📍 Yaoundé, Cameroun | 📧 blendmusic01@gmail.com</p>
+  <p>&copy; 2025 Blend Music</p>
+</footer>
+
+</body>
+</html>
