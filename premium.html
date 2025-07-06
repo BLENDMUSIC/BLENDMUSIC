@@ -2,10 +2,312 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Premium – Blend Music</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="script.js" defer></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff7f6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header.header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #e63946;
+      color: white;
+      padding: 15px 30px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+    header.header .logo-left img {
+      height: 50px;
+    }
+    header.header .header-center {
+      text-align: center;
+      flex-grow: 1;
+    }
+    header.header .header-center h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    header.header .header-center p.slogan {
+      margin: 0;
+      font-style: italic;
+      font-weight: 600;
+    }
+    nav.menu-right ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+    nav.menu-right ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav.menu-right ul li a[aria-current="page"] {
+      border-bottom: 2px solid white;
+    }
+    main {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    section.section {
+      margin-bottom: 40px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+      padding: 25px 30px;
+    }
+    h2, h3 {
+      color: #d62828;
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    ul.premium-list {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+    }
+    ul.premium-list li {
+      font-size: 1.2em;
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      background: #ffe6e6;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 1px 5px rgba(230, 57, 70, 0.2);
+      transition: transform 0.2s ease;
+    }
+    ul.premium-list li i {
+      color: #e63946;
+      margin-right: 15px;
+      min-width: 28px;
+      font-size: 1.5em;
+    }
+    ul.premium-list li:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+    }
+    .btn {
+      background-color: #e63946;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin: 20px auto 0;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #b22222;
+    }
+    .center {
+      text-align: center;
+    }
+    /* Audio player */
+    .track {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+      gap: 15px;
+    }
+    .track:last-child {
+      border-bottom: none;
+    }
+    .track p {
+      margin: 0;
+      flex-grow: 1;
+      font-weight: 600;
+    }
+    audio {
+      outline: none;
+      width: 200px;
+    }
+    /* Vidéo */
+    .video-item {
+      margin-bottom: 25px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 12px rgba(198, 64, 67, 0.25);
+    }
+    .video-item video {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+    /* Vote */
+    #vote-section {
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      padding: 20px;
+      background: #f9e6e6;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(230, 57, 70, 0.3);
+    }
+    #vote-section h3 {
+      margin-bottom: 15px;
+      color: #b22222;
+      text-align: center;
+    }
+    #vote-options {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    #vote-options label {
+      cursor: pointer;
+      font-weight: 600;
+      background: #fff0f0;
+      border-radius: 12px;
+      padding: 10px 20px;
+      box-shadow: 0 1px 5px rgba(230, 57, 70, 0.15);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    #vote-options input[type="radio"] {
+      display: none;
+    }
+    #vote-options input[type="radio"]:checked + label {
+      background-color: #e63946;
+      color: white;
+      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.5);
+    }
+    #vote-submit {
+      display: block;
+      margin: 15px auto 0;
+      background-color: #e63946;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #vote-submit:hover {
+      background-color: #b22222;
+    }
+    /* Newsletter */
+    #newsletter-section {
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+      background: #f8d7da;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 1px 8px rgba(230, 57, 70, 0.25);
+      text-align: center;
+    }
+    #newsletter-section h3 {
+      margin-bottom: 15px;
+      color: #a71d2a;
+    }
+    #newsletter-section form {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    #newsletter-email {
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      flex-grow: 1;
+      min-width: 200px;
+      font-size: 1em;
+    }
+    #newsletter-submit {
+      background-color: #a71d2a;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #newsletter-submit:hover {
+      background-color: #7e1318;
+    }
+    /* Erreur & succès */
+    #error-msg,
+    #success-msg {
+      max-width: 600px;
+      margin: 10px auto 20px auto;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+    }
+    #error-msg {
+      background: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+    }
+    #success-msg {
+      background: #d1e7dd;
+      color: #0f5132;
+      border: 1px solid #badbcc;
+    }
+    /* Déconnexion */
+    #logout-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #e63946;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(198,64,67,0.7);
+      transition: background-color 0.3s ease;
+      z-index: 999;
+    }
+    #logout-btn:hover {
+      background-color: #b22222;
+    }
+    @media (max-width: 600px) {
+      .track {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      audio {
+        width: 100%;
+      }
+      #vote-options {
+        flex-direction: column;
+        align-items: center;
+      }
+      #newsletter-section form {
+        flex-direction: column;
+      }
+      #newsletter-email {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -23,103 +325,339 @@
         <li><a href="index.html">Accueil</a></li>
         <li><a href="apropos.html">À propos</a></li>
         <li><a href="artistes.html">Nos artistes</a></li>
-        <li><a href="premium.html">Premium</a></li>
+        <li><a href="premium.html" aria-current="page">Premium</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
 
+  <button id="logout-btn" aria-label="Se déconnecter" title="Se déconnecter">Déconnexion</button>
+
   <main>
-    <section class="section premium-banner">
+    <section class="section premium-banner" aria-label="Présentation espace premium">
       <h1 class="titre-premium">Rejoignez l'espace Premium</h1>
       <p>La culture se vit en profondeur – découvrez-la en intégralité</p>
-      <a href="#avantages" class="btn">Voir les avantages</a>
+      <div class="center">
+        <a href="#avantages" class="btn">Voir les avantages</a>
+      </div>
     </section>
 
-    <section class="section" id="avantages">
+    <section class="section" id="avantages" aria-label="Avantages membres premium">
       <h2>Ce que vous débloquez en devenant Premium</h2>
+      <p class="intro">
+        Rejoignez notre communauté exclusive et profitez pleinement de Blend Music. Voici tout ce que nous vous réservons :
+      </p>
       <ul class="premium-list">
-        <li>Accès complet à toutes les musiques</li>
-        <li>Vidéos exclusives : studios, interviews, coulisses</li>
-        <li>Morceaux inédits à télécharger</li>
-        <li>Accès anticipé aux nouvelles sorties</li>
-        <li>Vote sur les prochaines productions</li>
-        <li>Newsletter avec contenus culturels et bonus</li>
-        <li>Lives privés en ligne</li>
-        <li>Votre nom affiché (si vous le souhaitez)</li>
+        <li><i class="fas fa-music"></i> Accès complet à toutes les musiques</li>
+        <li><i class="fas fa-video"></i> Vidéos exclusives : studios, interviews, coulisses</li>
+        <li><i class="fas fa-download"></i> Morceaux inédits à télécharger</li>
+        <li><i class="fas fa-bolt"></i> Accès anticipé aux nouvelles sorties</li>
+        <li><i class="fas fa-vote-yea"></i> Vote sur les prochaines productions</li>
+        <li><i class="fas fa-newspaper"></i> Newsletter avec contenus culturels et bonus</li>
+        <li><i class="fas fa-tv"></i> Lives privés en ligne</li>
+        <li><i class="fas fa-user-check"></i> Votre nom affiché (si vous le souhaitez)</li>
       </ul>
       <div class="center">
         <a href="paiement.html" class="btn large">Je m'abonne maintenant</a>
       </div>
+      <blockquote class="testimonial" tabindex="0" aria-label="Témoignage d'un membre Premium">
+        <p>« Grâce à Blend Music Premium, j’ai découvert des sons incroyables et participé à la création d’un album unique ! »</p>
+        <footer>– Jean M., membre Premium</footer>
+      </blockquote>
     </section>
 
-    <!-- 🔒 Section protégée par Firebase -->
-    <section class="section premium-content" id="premium-content" style="display: none;">
-      <h3>Musiques réservées aux membres Premium</h3>
-      <div class="locked-content">
-        <p><strong>Amina</strong> – Assiko</p>
-        <div class="locked-player">Audio réservé aux membres</div>
-      </div>
-      <div class="locked-content">
-        <p><strong>Déception</strong> – Mangambeu</p>
-        <div class="locked-player">Audio réservé aux membres</div>
-      </div>
-      <div class="locked-content">
-        <p><strong>Et s’il fallait</strong> – Bikutsi</p>
-        <div class="locked-player">Audio réservé aux membres</div>
-      </div>
-      <p class="premium-note">Connectez-vous ou abonnez-vous pour débloquer l’accès complet.</p>
+    <section class="section" id="premium-content" aria-label="Contenu réservé aux membres Premium" style="display:none;">
+      <h2>Musiques exclusives</h2>
+      <div id="music-list" aria-live="polite" aria-relevant="additions"></div>
+
+      <h2>Vidéos exclusives</h2>
+      <div id="video-list" aria-live="polite" aria-relevant="additions"></div>
+
+      <section id="vote-section" aria-label="Votez pour la prochaine production">
+        <h3>Votez pour la prochaine production</h3>
+        <form id="vote-form">
+          <div id="vote-options" role="radiogroup" aria-labelledby="vote-section-h3">
+            <!-- options insérées dynamiquement -->
+          </div>
+          <button id="vote-submit" type="submit" aria-label="Soumettre votre vote">Voter</button>
+        </form>
+        <p id="vote-msg" role="alert" aria-live="assertive" style="margin-top:15px;"></p>
+      </section>
+
+      <section id="newsletter-section" aria-label="Inscription newsletter Blend Music">
+        <h3>Inscrivez-vous à la newsletter</h3>
+        <form id="newsletter-form" novalidate>
+          <input
+            type="email"
+            id="newsletter-email"
+            name="newsletter-email"
+            placeholder="Votre email"
+            aria-label="Adresse email pour newsletter"
+            required
+          />
+          <button type="submit" id="newsletter-submit">S’inscrire</button>
+        </form>
+        <p id="success-msg" role="alert"></p>
+        <p id="error-msg" role="alert"></p>
+      </section>
     </section>
   </main>
 
-  <footer>
+  <footer style="text-align:center; padding:15px; background:#f8f8f8; font-size:0.9em; color:#666;">
     <p>📍 Yaoundé, Cameroun | 📧 blendmusic01@gmail.com</p>
     <p>&copy; 2025 Blend Music | Tous droits réservés</p>
   </footer>
 
-  <!-- ✅ Script de protection avec Firebase + Firestore -->
   <script type="module">
     import { auth, db } from './firebase.js';
-    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      doc,
+      getDoc,
+      collection,
+      getDocs,
+      addDoc,
+      query,
+      where,
+      setDoc,
+      updateDoc,
+      serverTimestamp,
+      orderBy,
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import {
+      onAuthStateChanged,
+      signOut,
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    onAuthStateChanged(auth, async (user) => {
-      if (!user || !user.emailVerified) {
-        alert("Veuillez vous connecter et vérifier votre adresse e-mail.");
-        window.location.href = "connexion.html";
-        return;
-      }
+    // DOM Elements
+    const premiumContent = document.getElementById("premium-content");
+    const musicList = document.getElementById("music-list");
+    const videoList = document.getElementById("video-list");
+    const voteOptionsContainer = document.getElementById("vote-options");
+    const voteForm = document.getElementById("vote-form");
+    const voteMsg = document.getElementById("vote-msg");
+    const newsletterForm = document.getElementById("newsletter-form$
 
-      const ref = doc(db, "abonnements", user.uid);
-      const snap = await getDoc(ref);
+// Newsletter messages
+const successMsg = document.getElementById("success-msg");
+const errorMsg = document.getElementById("error-msg");
+const logoutBtn = document.getElementById("logout-btn");
 
-      if (!snap.exists()) {
-        alert("Aucun abonnement trouvé. Merci de vous abonner.");
-        window.location.href = "paiement.html";
-        return;
-      }
+// Gérer déconnexion
+logoutBtn.addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    alert("Déconnecté avec succès.");
+    window.location.href = "index.html";
+  } catch (error) {
+    alert("Erreur lors de la déconnexion : " + error.message);
+  }
+});
 
-      const data = snap.data();
-      const dateDebut = new Date(data.dateDebut);
-      const plan = data.plan;
+onAuthStateChanged(auth, async (user) => {
+  if (!user || !user.emailVerified) {
+    alert("Veuillez vous connecter et vérifier votre adresse e-mail.");
+    window.location.href = "connexion.html";
+    return;
+  }
 
-      let duree = 0;
-      if (plan === "mensuel") duree = 30;
-      else if (plan === "semestriel") duree = 180;
-      else if (plan === "annuel") duree = 365;
+  // Vérifier abonnement
+  const ref = doc(db, "abonnements", user.uid);
+  const snap = await getDoc(ref);
 
-      const now = new Date();
-      const diffJours = (now - dateDebut) / (1000 * 60 * 60 * 24);
+  if (!snap.exists()) {
+    alert("Aucun abonnement trouvé. Merci de vous abonner.");
+    window.location.href = "paiement.html";
+    return;
+  }
 
-      if (diffJours > duree) {
-        alert("Votre abonnement a expiré. Merci de le renouveler.");
-        window.location.href = "paiement.html";
-      } else {
-        document.getElementById("premium-content").style.display = "block";
-      }
+  const data = snap.data();
+  const dateDebut = new Date(data.dateDebut);
+  const plan = data.plan;
+
+  let duree = 0;
+  if (plan === "mensuel") duree = 30;
+  else if (plan === "semestriel") duree = 180;
+  else if (plan === "annuel") duree = 365;
+
+  const now = new Date();
+  const diffJours = (now - dateDebut) / (1000 * 60 * 60 * 24);
+
+  if (diffJours > duree) {
+    alert("Votre abonnement a expiré. Merci de le renouveler.");
+    window.location.href = "paiement.html";
+  } else {
+    premiumContent.style.display = "block";
+    await loadMusic();
+    await loadVideos();
+    await loadVoteOptions();
+  }
+});
+
+// Charger musiques Premium depuis Firestore
+async function loadMusic() {
+  musicList.innerHTML = "<p>Chargement des musiques...</p>";
+  try {
+    const musicsSnap = await getDocs(collection(db, "musiques_premium"));
+    musicList.innerHTML = "";
+    musicsSnap.forEach(docSnap => {
+      const data = docSnap.data();
+      const trackDiv = document.createElement("div");
+      trackDiv.classList.add("track");
+
+      const title = document.createElement("p");
+      title.textContent = `${data.titre} – ${data.genre}`;
+
+      const audio = document.createElement("audio");
+      audio.controls = true;
+      audio.src = data.url;
+      audio.setAttribute("preload", "none");
+
+      trackDiv.appendChild(title);
+      trackDiv.appendChild(audio);
+      musicList.appendChild(trackDiv);
     });
+
+    setupSingleAudioControl();
+  } catch (err) {
+    musicList.innerHTML = "<p>Erreur lors du chargement des musiques.</p>";
+    console.error(err);
+  }
+}
+
+// Pour qu’un seul audio soit joué à la fois
+function setupSingleAudioControl() {
+  const audios = musicList.querySelectorAll("audio");
+  audios.forEach((audio) => {
+    audio.addEventListener("play", () => {
+      audios.forEach((other) => {
+        if (other !== audio) other.pause();
+      });
+    });
+  });
+}
+
+// Charger vidéos Premium depuis Firestore
+async function loadVideos() {
+  videoList.innerHTML = "<p>Chargement des vidéos...</p>";
+  try {
+    const videosSnap = await getDocs(collection(db, "videos_premium"));
+    videoList.innerHTML = "";
+    videosSnap.forEach(docSnap => {
+      const data = docSnap.data();
+      const videoDiv = document.createElement("div");
+      videoDiv.classList.add("video-item");
+
+      const video = document.createElement("video");
+      video.controls = true;
+      video.src = data.url;
+      video.setAttribute("preload", "none");
+      video.title = data.titre;
+
+      videoDiv.appendChild(video);
+      videoList.appendChild(videoDiv);
+    });
+  } catch (err) {
+    videoList.innerHTML = "<p>Erreur lors du chargement des vidéos.</p>";
+    console.error(err);
+  }
+}
+
+// Charger options de vote depuis Firestore
+async function loadVoteOptions() {
+  voteOptionsContainer.innerHTML = "<p>Chargement des options de vote...</p>";
+  voteMsg.textContent = "";
+  try {
+    const optionsSnap = await getDocs(collection(db, "vote_options"));
+    voteOptionsContainer.innerHTML = "";
+    optionsSnap.forEach(docSnap => {
+      const data = docSnap.data();
+      const optionId = docSnap.id;
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.id = optionId;
+      input.name = "vote-option";
+      input.value = optionId;
+
+      const label = document.createElement("label");
+      label.setAttribute("for", optionId);
+      label.textContent = data.titre;
+
+      voteOptionsContainer.appendChild(input);
+      voteOptionsContainer.appendChild(label);
+    });
+  } catch (err) {
+    voteOptionsContainer.innerHTML = "<p>Erreur lors du chargement des options de vote.</p>";
+    console.error(err);
+  }
+}
+
+// Soumission du vote
+voteForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  voteMsg.textContent = "";
+
+  const selectedOption = voteForm.querySelector('input[name="vote-option"]:checked');
+  if (!selectedOption) {
+    voteMsg.style.color = "red";
+    voteMsg.textContent = "Veuillez sélectionner une option pour voter.";
+    return;
+  }
+
+  const user = auth.currentUser;
+  if (!user) {
+    voteMsg.style.color = "red";
+    voteMsg.textContent = "Vous devez être connecté pour voter.";
+    return;
+  }
+
+  try {
+    // On stocke le vote dans une sous-collection "votes" utilisateur
+    const voteRef = doc(db, "votes", user.uid);
+    await setDoc(voteRef, {
+      option: selectedOption.value,
+      timestamp: serverTimestamp(),
+    });
+
+    voteMsg.style.color = "green";
+    voteMsg.textContent = "Merci pour votre vote !";
+  } catch (err) {
+    voteMsg.style.color = "red";
+    voteMsg.textContent = "Erreur lors de l'enregistrement du vote.";
+    console.error(err);
+  }
+});
+
+// Gestion formulaire newsletter
+newsletterForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  successMsg.style.display = "none";
+  errorMsg.style.display = "none";
+
+  const email = newsletterForm['newsletter-email'].value.trim();
+  if (!email) {
+    errorMsg.textContent = "Veuillez entrer une adresse e-mail valide.";
+    errorMsg.style.display = "block";
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "newsletter"), {
+      email,
+      dateInscription: serverTimestamp(),
+    });
+    successMsg.textContent = "Merci pour votre inscription à la newsletter !";
+    successMsg.style.display = "block";
+    newsletterForm.reset();
+  } catch (err) {
+    errorMsg.textContent = "Erreur lors de l'inscription. Réessayez plus tard.";
+    errorMsg.style.display = "block";
+    console.error(err);
+  }
+});
+
+import { auth, db, storage } from './firebase.js';
+
   </script>
 </body>
 </html>
-
-

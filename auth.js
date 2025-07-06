@@ -58,3 +58,4 @@ if (loginForm) {
     }
   });
 }
+import { auth, db, storage } from './firebase.js';
